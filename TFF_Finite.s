@@ -1,4 +1,4 @@
-%------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------
 tff(human_type,type,      human: $tType ).
 tff(cat_type,type,        cat: $tType ).
 tff(jon_decl,type,        jon: human ).
@@ -31,12 +31,10 @@ tff(garfield,interpretation,
 %----The domain for cat is d_cat
       & ! [C: cat] : ? [DC: d_cat] : C = d2cat(DC)
 %----The d_cat elements are {d_garfield,d_arlene,d_nermal}
-      & ! [DC: d_cat]: 
-          ( DC = d_garfield | DC = d_arlene | DC = d_nermal )
+      & ! [DC: d_cat]: ( DC = d_garfield | DC = d_arlene | DC = d_nermal )
       & $distinct(d_garfield,d_arlene,d_nermal)
 %----The type-promoter is a bijection
-      & ! [DC1: d_cat,DC2: d_cat] :
-          ( d2cat(DC1) = d2cat(DC2) => DC1 = DC2 ) )
+      & ! [DC1: d_cat,DC2: d_cat] : ( d2cat(DC1) = d2cat(DC2) => DC1 = DC2 ) )
 %----Interpret terms via the type-promoted domain
     & ( jon = d2human(d_jon)
       & garfield = d2cat(d_garfield)
@@ -49,5 +47,4 @@ tff(garfield,interpretation,
     & ( owns(d2human(d_jon),d2cat(d_garfield))
       & ~ owns(d2human(d_jon),d2cat(d_arlene))
       & ~ owns(d2human(d_jon),d2cat(d_nermal)) ) ) ).
-
-%------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------

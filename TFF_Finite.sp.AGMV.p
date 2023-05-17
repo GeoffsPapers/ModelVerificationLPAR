@@ -1,4 +1,4 @@
-%------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------
 %----All (hu)men are created equal. John is a human. John got an F grade.
 %----There is someone (a human) who got an A grade. An A grade is not 
 %----equal to an F grade. Grades are not human. Therefore, it is (actually
@@ -28,7 +28,7 @@ tff(equality_lost,conjecture,
       ( created_equal(H1,H2)
     <=> ( H1 = H2 ) ) ).
 
-%------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------
 tff(man_type,type,           man: $tType ).
 tff(grade_type,type,         grade: $tType ).
 tff(john_decl,type,          john: man ).
@@ -78,5 +78,4 @@ tff(equality_lost,interpretation,
 %----If John was not created equal to the person who got an A:
 %---- & ~ created_equal(d2man(d_john),d2man(d_got_A))
 %---- & ~ created_equal(d2man(d_got_A),d2man(d_john))
-
-%------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------

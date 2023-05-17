@@ -1,4 +1,4 @@
-%------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------
 tff(person_type,type,        person: $tType ).
 tff(bob_decl,type,           bob: person ).
 tff(child_of_decl,type,      child_of: person > person ).
@@ -19,5 +19,4 @@ tff(people,interpretation,
 %----Interpretation of descendancy
     & ! [A: $int,D: $int] : 
         ( is_descendant(int_to_person(A),int_to_person(D)) <=> $less(A,D) ) ) ).
-
-%------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------
