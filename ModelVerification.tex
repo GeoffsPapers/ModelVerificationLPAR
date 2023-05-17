@@ -465,7 +465,7 @@ These questions are answered as follows:
 
       An implementation is available online as the AGMV tool in the SystemOnTSTP \cite{Sut07-CSR} 
       web interface {\smalltt{\url{https://www.tptp.org/cgi-bin/SystemOnTSTP}}}.
-      The tool input is the concatenation of the modeled formula and the interpretation.
+      The tool input is the concatenation of the problem and the interpretation.
       Figure~\ref{TF0InfiniteVerification} shows the verification problem for the problem in 
       Figure~\ref{TF0InfiniteProblem} and its model in Figure~\ref{TF0InfiniteInterpretation}.
       The input to verify the finite countermodel in Figure~\ref{TF0FiniteInterpretation}, for the 
@@ -684,9 +684,9 @@ Finally, the row of houses and boxes are the interpretations of the symbols appl
 arguments; houses for domain elements and boxes for truth values.
 Paths from leaf type nodes to root type nodes show the interpretation of symbols and the domain
 elements.
-For example, in Figure~\ref{TF0FiniteIIV} the type of {\smalltt{grade\_of}} is {\smalltt{grade}},
-and {\smalltt{grade\_of(d\_john)}} is interpreted as {\smalltt{d\_f}}, which is of type
-{\smalltt{d\_grade}} in the interpretation formula.
+For example, in Figure~\ref{TF0FiniteIIV} the result type of {\smalltt{loves}} is {\smalltt{cat}},
+and {\smalltt{loves(d\_arlene)}} is interpreted as {\smalltt{d\_garfield}}, which is of type
+{\smalltt{d\_cat}} in the interpretation formula.
 
 IIV has interactive features: In Figure~\ref{TF0FiniteIIV} the cursor is hovering over the 
 {\smalltt{d\_nermal}} node on the path from {\smalltt{owns}} to {\smalltt{\$false}}, showing 
