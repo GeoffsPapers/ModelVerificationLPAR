@@ -688,12 +688,11 @@ For example, in Figure~\ref{TF0FiniteIIV} the type of {\smalltt{grade\_of}} is {
 and {\smalltt{grade\_of(d\_john)}} is interpreted as {\smalltt{d\_f}}, which is of type
 {\smalltt{d\_grade}} in the interpretation formula.
 
-IIV has interactive features: In Figure~\ref{TF0FiniteIIV} the cursor is hovering over 
-the lower {\smalltt{d\_john}} node on the path from {\smalltt{created\_equal}} to 
-{\smalltt{\$true}}, showing that {\smalltt{created\_equal(d\_john,d\_john)}} is interpreted as 
-{\smalltt{\$true}}.
+IIV has interactive features: In Figure~\ref{TF0FiniteIIV} the cursor is hovering over the 
+{\smalltt{d\_nermal}} node on the path from {\smalltt{owns}} to {\smalltt{\$false}}, showing 
+that {\smalltt{owns(d\_jon,d\_nermal)}} is interpreted as {\smalltt{\$false}}.
 The nodes above are increasingly darker red (grey if printed) up to the {\smalltt{\$o}} node
-that is the result type of {\smalltt{created\_equal}}, and increasingly darker blue down to 
+that is the result type of {\smalltt{owns}}, and increasingly darker blue down to 
 the {\smalltt{\$o}} node that is the type of {\smalltt{\$true}}.
 This highlighting provides easy focus on the interpretation of chosen symbols, e.g., hovering
 over inverted house nodes shows what symbols applied to what domain elements are interpreted as 
