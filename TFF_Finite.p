@@ -1,31 +1,31 @@
-%------------------------------------------------------------------------------
-%----All (hu)men are created equal. John is a human. John got an F grade.
-%----There is someone (a human) who got an A grade. An A grade is not 
-%----equal to an F grade. Grades are not human. Therefore, it is (actually
-%----not) the case being created equal is the same as really being equal.
-tff(man_type,type,           man: $tType ).
-tff(grade_type,type,         grade: $tType ).
-tff(john_decl,type,          john: man ).
-tff(a_decl,type,             a: grade ).
-tff(f_decl,type,             f: grade ).
-tff(grade_of_decl,type,      grade_of: man > grade ).
-tff(created_equal_decl,type, created_equal: ( man * man ) > $o ).
+%--------------------------------------------------------
+tff(human_type,type,      human: $tType ).
+tff(cat_type,type,        cat: $tType ).
+tff(jon_decl,type,        jon: human ).
+tff(garfield_decl,type,   garfield: cat ).
+tff(arlene_decl,type,     arlene: cat ).
+tff(nermal_decl,type,     nermal: cat ).
+tff(loves_decl,type,      loves: cat > cat ).
+tff(owns_decl,type,       owns: ( human * cat ) > $o ).
 
-tff(all_created_equal,axiom,
-    ! [H1: man,H2: man] : created_equal(H1,H2) ).
+tff(only_jon,axiom, ! [H: human] : H = jon ).
 
-tff(john_failed,axiom,
-    grade_of(john) = f ).
+tff(only_garfield_and_arlene_and_nermal,axiom,
+    ! [C: cat] :
+      ( C = garfield | C = arlene | C = nermal ) ).
 
-tff(someone_got_an_a,axiom,
-    ? [H: man] : grade_of(H) = a ).
+tff(distinct_cats,axiom,
+    ( garfield != arlene & arlene != nermal
+    & nermal != garfield ) ).
 
-tff(distinct_grades,axiom,
-    a != f ).
+tff(jon_owns_garfield_not_arlene,axiom,
+    ( owns(jon,garfield) & ~ owns(jon,arlene) ) ).
 
-tff(equality_lost,conjecture,
-    ! [H1: man,H2: man] :
-      ( created_equal(H1,H2)
-    <=> ( H1 = H2 ) ) ).
+tff(all_cats_love_garfield,axiom,
+    ! [C: cat] : ( loves(C) = garfield ) ).
 
-%------------------------------------------------------------------------------
+tff(jon_owns_garfields_lovers,conjecture,
+    ! [C: cat] :
+      ( ( loves(C) = garfield & C != arlene )
+     => owns(jon,C) ) ).
+%--------------------------------------------------------

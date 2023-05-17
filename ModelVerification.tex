@@ -2,6 +2,7 @@
 
 % \usepackage{doc}
 \usepackage{setspace}
+\usepackage{verbatim}
 
 %----Making things more compact
 \newcommand{\smalltt}[1]{\small \texttt{#1}}
@@ -275,34 +276,7 @@ Figures~\ref{TF0FiniteProblem}~and~\ref{TF0InfiniteProblem} are examples of prob
 \begin{figure}[htbp]
 \small
 \setstretch{0.9}
-\begin{verbatim}
-%--------------------------------------------------------
-tff(man_type,type,           man: $tType ).
-tff(grade_type,type,         grade: $tType ).
-tff(john_decl,type,          john: man ).
-tff(a_decl,type,             a: grade ).
-tff(f_decl,type,             f: grade ).
-tff(grade_of_decl,type,      grade_of: man > grade ).
-tff(created_equal_decl,type, 
-    created_equal: ( man * man ) > $o ).
-
-tff(all_created_equal,axiom,
-    ! [H1: man,H2: man] : created_equal(H1,H2) ).
-
-tff(john_failed,axiom,
-    grade_of(john) = f ).
-
-tff(someone_got_an_a,axiom,
-    ? [H: man] : grade_of(H) = a ).
-
-tff(distinct_grades,axiom,
-    a != f ).
-
-tff(equality_lost,conjecture,
-    ! [H1: man,H2: man] :
-      ( created_equal(H1,H2) <=> ( H1 = H2 ) ) ).
-%--------------------------------------------------------
-\end{verbatim}
+\verbatiminput{TFF_Finite.p}
 \caption{A TF0 problem (with a finite countermodel)\\
 {\footnotesize \url{https://raw.githubusercontent.com/GeoffsPapers/ModelVerificationLPAR/master/TFF_Finite.p}}}
 \label{TF0FiniteProblem}
@@ -311,30 +285,7 @@ tff(equality_lost,conjecture,
 \begin{figure}[htbp]
 \small
 \setstretch{0.9}
-\begin{verbatim}
-%--------------------------------------------------------
-tff(person_type,type,        person: $tType ).
-tff(bob_decl,type,           bob: person ).
-tff(child_of_decl,type,      child_of: person > person ).
-tff(is_descendant_decl,type, 
-    is_descendant: ( person * person ) > $o ).
-
-tff(descendents_different,axiom,
-    ! [A: person,D: person] : 
-      ( is_descendant(A,D) => A != D ) ).
-
-tff(descendent_transitive,axiom,
-    ! [A: person,C: person,G: person] :
-      ( ( is_descendant(A,C) & is_descendant(C,G) ) 
-     => is_descendant(A,G) ) ).
-
-tff(child_is_descendant,axiom,
-    ! [P: person] : is_descendant(P,child_of(P)) ).
-
-tff(all_have_child,axiom,
-    ! [P: person] : ? [C: person] : C = child_of(P) ).
-%--------------------------------------------------------
-\end{verbatim}
+\verbatiminput{TFF_Infinite.p}
 \caption{A TF0 problem (with an infinite model)\\
 {\footnotesize \url{https://raw.githubusercontent.com/GeoffsPapers/ModelVerificationLPAR/master/TFF_Infinite.p}}}
 \label{TF0InfiniteProblem}
@@ -455,59 +406,7 @@ tuples with negative integers, i.e., this is an example of a partial interpretat
 \begin{figure}[htbp]
 \small
 \setstretch{0.9}
-\begin{verbatim}
-%--------------------------------------------------------
-tff(man_type,type,           man: $tType ).
-tff(grade_type,type,         grade: $tType ).
-tff(john_decl,type,          john: man ).
-tff(a_decl,type,             a: grade ).
-tff(f_decl,type,             f: grade ).
-tff(grade_of_decl,type,      grade_of: man > grade ).
-tff(created_equal_decl,type, created_equal: ( man * man ) > $o ).
-
-%----Types of the domains
-tff(d_man_type,type,         d_man: $tType).
-tff(d_grade_type,type,       d_grade: $tType).
-%----Types of the promotion functions
-tff(d2man_decl,type,         d2man: d_man > man ).
-tff(d2grade_decl,type,       d2grade: d_grade > grade ).
-%----Types of the domain elements
-tff(d_john_decl,type,        d_john: d_man ).
-tff(d_gotA_decl,type,        d_gotA: d_man ).
-tff(d_a_decl,type,           d_a: d_grade ).
-tff(d_f_decl,type,           d_f: d_grade ).
-
-tff(equality_lost,interpretation,
-%----The domain for man is d_man
-    ( ( ! [M: man] : ? [DM: d_man] : M = d2man(DM)
-%----The d_man elements are d_john and d_gotA
-      & ! [DM: d_man] : ( DM = d_john | DM = d_gotA )
-      & $distinct(d_john,d_gotA)
-%----The type-promoter is a bijection
-      & ! [DM1: d_man,DM2: d_man] :
-          ( d2man(DM1) = d2man(DM2) => DM1 = DM2 )
-%----The domain for grade is d_grade
-      & ! [G: grade] : ? [DG: d_grade] : G = d2grade(DG)
-%----The d_grade elements are d_a and d_f
-      & ! [DG: d_grade]: ( DG = d_a | DG = d_f )
-      & $distinct(d_a,d_f)
-%----The type-promoter is a bijection
-      & ! [DG1: d_grade,DG2: d_grade] :
-          ( d2grade(DG1) = d2grade(DG2) => DG1 = DG2 ) )
-%----Interpret terms via the type-promoted domain
-    & ( a = d2grade(d_a)
-      & f = d2grade(d_f)
-      & john = d2man(d_john)
-      & grade_of(d2man(d_john)) = d2grade(d_f)
-      & grade_of(d2man(d_gotA)) = d2grade(d_a) )
-%----Interpret atoms as true of false
-    & ( created_equal(d2man(d_john),d2man(d_john))
-      & created_equal(d2man(d_john),d2man(d_gotA))
-      & created_equal(d2man(d_gotA),d2man(d_john))
-      & created_equal(d2man(d_gotA),d2man(d_gotA)) ) 
-    ) ).
-%--------------------------------------------------------
-\end{verbatim}
+\verbatiminput{TFF_Finite.s}
 \caption{A TF0 interpretation with a finite domain \\
 {\footnotesize \url{https://raw.githubusercontent.com/GeoffsPapers/ModelVerificationLPAR/master/TFF_Finite.s}}}
 \label{TF0FiniteInterpretation}
@@ -516,33 +415,7 @@ tff(equality_lost,interpretation,
 \begin{figure}[htbp]
 \small
 \setstretch{0.9}
-\begin{verbatim}
-%--------------------------------------------------------
-tff(person_type,type,        person: $tType ).
-tff(bob_decl,type,           bob: person ).
-tff(child_of_decl,type,      child_of: person > person ).
-tff(is_descendant_decl,type, 
-    is_descendant: ( person * person ) > $o ).
-
-tff(int2person_decl,type,    int2person: $int > person ).
-
-tff(people,interpretation,
-%----Domain for type person is the integers
-    ( ! [P: person] : ? [I: $int] : int2person(I) = P
-%----The type-promoter is a bijection
-    & ! [I1: $int,I2: $int] : 
-        ( int2person(I1) = int2person(I2) 
-       => I1 = I2 )
-%----Mapping people to integers. 
-    & bob = int2person(0)
-    & ! [I: $int] : 
-        child_of(int2person(I)) = int2person($sum(I,1))
-%----Interpretation of descendancy
-    & ! [A: $int,D: $int] : 
-        ( is_descendant(int2person(A),int2person(D)) 
-      <=> $less(A,D) ) ) ).
-%--------------------------------------------------------
-\end{verbatim}
+\verbatiminput{TFF_Integer.s}
 \caption{A TF0 interpretation with an infinite domain\\
 {\footnotesize \url{https://raw.githubusercontent.com/GeoffsPapers/ModelVerificationLPAR/master/TFF_Integer.s}}}
 \label{TF0InfiniteInterpretation}
@@ -595,46 +468,15 @@ These questions are answered as follows:
       An implementation is available online as the AGMV tool in the SystemOnTSTP \cite{Sut07-CSR} 
       web interface {\smalltt{\url{https://www.tptp.org/cgi-bin/SystemOnTSTP}}}.
       The tool input is the concatenation of the modeled formula and the interpretation.
-      A FOF example that can be used as the ``URL to fetch from'' in the web interface is
-      {\smalltt{\url{https://raw.githubusercontent.com/GeoffsPapers/ModelVerificationLPAR/master/FOF_Finite.sp.AGMV.p}}}
+      The input to verify the countermodel in Figure~\ref{TF0FiniteInterpretation}, for the 
+      problem in Figure~\ref{TF0FiniteProblem}, is
+      {\smalltt{\url{https://raw.githubusercontent.com/GeoffsPapers/ModelVerificationLPAR/master/TFF_Finite.sp.AGMV.p}}}
 \end{enumerate}
 
 \begin{figure}[htbp]
 \small
 \setstretch{0.9}
-\begin{verbatim}
-%--------------------------------------------------------
-tff(person_type,type,        person: $tType ).
-tff(bob_decl,type,           bob: person ).
-tff(child_of_decl,type,      child_of: person > person ).
-tff(is_descendant_decl,type, 
-    is_descendant: ( person * person ) > $o ).
-
-tff(int2person_decl,type,    int2person: $int > person ).
-
-tff(people,axiom,
-    ( ( ! [P: person] : ? [I: $int] : int2person(I) = P
-      & ! [I1: $int,I2: $int] : 
-          ( int2person(I1) = int2person(I2) 
-         => I1 = I2 ) )
-    & bob = int2person(0)
-    & ! [I: $int] : 
-        child_of(int2person(I)) = int2person($sum(I,1))
-    & ! [A: $int,D: $int] : 
-        ( is_descendant(int2person(A),int2person(D)) 
-      <=> $less(A,D) ) ) ).
-
-tff(prove_formulae,conjecture,
-    ( ! [A: person,D: person] : 
-        ( is_descendant(A,D) => A != D )
-    & ! [A: person,C: person,G: person] :
-        ( ( is_descendant(A,C) & is_descendant(C,G) )
-       => is_descendant(A,G) )
-    & ! [P: person] : is_descendant(P,child_of(P))
-    & ! [P: person] : ? [C: person] : C = child_of(P) 
-    ) ).
-%--------------------------------------------------------
-\end{verbatim}
+\verbatiminput{TFF_Integer.s.p}
 \caption{The TF0 verification problem for 
 Figures~\ref{TF0InfiniteProblem}~and~\ref{TF0InfiniteInterpretation}\\
 {\footnotesize \url{https://raw.githubusercontent.com/GeoffsPapers/ModelVerificationLPAR/master/TFF_Infinite.s.p}}}
