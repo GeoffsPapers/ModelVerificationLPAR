@@ -27,7 +27,6 @@ tff(equality_lost,conjecture,
     ! [H1: man,H2: man] :
       ( created_equal(H1,H2)
     <=> ( H1 = H2 ) ) ).
-
 %----------------------------------------------------------------------------------
 tff(man_type,type,           man: $tType ).
 tff(grade_type,type,         grade: $tType ).
