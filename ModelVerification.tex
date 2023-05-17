@@ -671,12 +671,11 @@ IDV was originally a Java applet, but has since been ported to HTML/JavaScript u
 IIV has benefited from the mature state of IDV.
 The implementation is ``initial'' because it is fully automated for only finite TF0 and FOF
 interpretations; for infinite interpretations different components of the interpretation formula 
-currently have to be manually extracted into separate annotated formulae, to mimic a derivation 
-that IDV can render.
+have to be manually extracted into separate annotated formulae, to mimic a derivation that IDV 
+can render.
 
 Figure~\ref{TF0FiniteIIV} is the visualization of the finite countermodel in 
-Figure~\ref{TF0FiniteInterpretation}, modified so that {\smalltt{john}} is not created equal 
-to the person who got an {\smalltt{A}}.
+Figure~\ref{TF0FiniteInterpretation}.
 The top row of inverted triangles are the types in the given formulae,
 while the bottom row of inverted triangles are the types of the domains.
 The inverted houses are the function and predicate symbols, and the successive rows of ovals are 
@@ -713,10 +712,10 @@ Here (universally quantified) variables are used to represent an infinite number
 domain elements, and built-in arithmetic predicates are used to compute symbols' mappings.
 The cursor is hovering over the {\smalltt{X:\$int}} node, showing how 
 {\smalltt{child\_of(X)}} is interpreted as {\smalltt{\$sum(X,1)}}.
-This visualization is available in IIV using the IIV format file
-{\smalltt{\url{https://raw.githubusercontent.com/GeoffsPapers/ModelVerificationLPAR/master/TFF_Integer.s.IIV}}}
-as the ``URL to fetch from'' - this file was manually extracted from the infinite model in 
-Figure~\ref{TF0InfiniteInterpretation}.
+% This visualization is available in IIV using the IIV format file
+% {\smalltt{\url{https://raw.githubusercontent.com/GeoffsPapers/ModelVerificationLPAR/master/TFF_Integer.s.IIV}}}
+% as the ``URL to fetch from'' - this file was manually extracted from the infinite model in 
+% Figure~\ref{TF0InfiniteInterpretation}.
 
 \begin{figure}[htbp]
 \centering
