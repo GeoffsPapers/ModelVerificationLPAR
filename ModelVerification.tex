@@ -87,7 +87,7 @@ task of proving theorems from axioms -- the derivation of conclusions that follo
 from known facts \cite{RV01-HAR}.
 The axioms and conjecture to be proved (and hence become a theorem) are written in an 
 appropriately expressive logic, and the proofs are often similarly written in logic \cite{SS+06}.
-In this work typed first-order logic in the form of \cite{Wal83,Sch85,Coh87},
+In this work simply-typed first-order logic in the form of \cite{Wal83,Sch85,Coh87},
 whose expressive power is sufficient for a wide range of topics \cite{Sut17}, is used
 (This work is also applicable to untyped first-order logic
 where terms have the type $\iota$ and formulae have the type $o$, 
@@ -98,7 +98,7 @@ This process depends on finding an {\em interpretation}, i.e., a structure that 
 to domain elements and formulae to truth values.
 An interpretation that maps a formula to {\em true} is a {\em model} of the formula.
 A conjecture is disproved by finding an interpretation that is a model of the axioms, but 
-maps the conjecture to {\em false}.
+is not a model of the conjecture, aka a {\em countermodel} for the conjecture.
 A salient application area that harnesses this form of ATP is verification \cite{DKW08},
 where a countermodel is used to pinpoint the reason why a proof obligation fails, and
 correspondingly points to the location of the fault in the system being verified.
@@ -115,7 +115,7 @@ This paper considers the tasks of verifying models and visualizing interpretatio
 new tools for these tasks - Sections~\ref{Verification}~and~\ref{Visualization}.
 
 \paragraph{Related Work:}
-In \cite{SS+06} a TPTP format for interpretations with finite domains was defined, and has been 
+In \cite{SS+06} a TPTP format for interpretations with finite domains was defined, and it has been 
 adopted by some ATP systems, e.g., Paradox and Vampire.
 The SMT-LIB standard \cite{BFT17} defines a format for model output, and commands to inspect 
 models.  
@@ -139,8 +139,7 @@ Related work on model verification and interpretation visualization is sparse.
 In personal communications with members of the Vampire team it was revealed that Vampire can 
 internally verify finite models in TPTP format by using the model formulae to evaluate the given 
 formulae.
-This approach removes the need for theorem proving as part of the verification process, but
-is limited to finite models.
+This approach is limited to finite models.
 In personal communications with the developer of Paradox he explained his approach, which is to 
 use a trusted model finder to show that the model formulae and the given formulae are together 
 satisfiable.
@@ -160,7 +159,7 @@ reducing the visual clutter when displaying relations with properties such as sy
 transitivity, etc.
 In other ways that work was quite different from the visualization described in this work.
 
-\paragraph{This paper} is organized as follows:
+\paragraph{This paper is organized as follows:}
 Section~\ref{TPTP} introduces the TPTP World which provides the framework and languages used
 in this research.
 Section~\ref{Interpretations} discusses the nature of interpretations, and describes the new 
@@ -367,7 +366,7 @@ An interpretation formula is a conjunction of three components:
             defined type);
       \item a formula making the type-promotion function an injection,
             % (unless the type of the domain is the same as the type in the formula), 
-            which with the surjectivity makes it a bijection.
+            which together with the surjectivity makes it a bijection.
       \end{packed_itemize}
 \item interpretation of the function symbols, as equalities whose left-hand sides are 
       formed from symbols applied to type-promoted domain elements, and whose right-hand sides 
@@ -490,7 +489,6 @@ complicated due to the introduction of types and type promotion functions.
 The extension to infinite domains is quite simple after that, following 
 Section~\ref{InterpretationsTF0}.
 
-\newpage
 \paragraph{Proof}
 ~\\
 Let $\Sigma$ be an untyped first-order language:
